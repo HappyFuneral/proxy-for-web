@@ -44,6 +44,8 @@ services:
     restart: always
     build: ./proxy
     container_name: web-proxy
+    links: 
+    - hellneverends
     ports:
       - "80:80"
 volumes:
