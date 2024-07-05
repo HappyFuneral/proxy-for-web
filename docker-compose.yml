@@ -39,15 +39,16 @@ services:
       WORDPRESS_DB_NAME: wpdb
 # Similar to MySQL image variables, the last four lines define the main variables needed for the WordPress container to work properly with the MySQL container.
     volumes:
-      ["./hellneverends/:/var/www/html"]
+      ["./:/var/www/html"]
   proxy:
     restart: always
     build: ./proxy
     container_name: web-proxy
-    links: 
-    - hellneverends
     ports:
-      - "80:80"
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+      # Add any other Stream port you wa
 volumes:
   mysql: {}
 
