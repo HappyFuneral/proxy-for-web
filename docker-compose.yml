@@ -1,7 +1,6 @@
 version: "3" 
 # Defines which compose version to use
 services:
-  # Services line define which Docker images to run. In this case, it will be MySQL server and WordPress image.
   db:
     image: mysql:5.7
     container_name: wpdb
@@ -51,9 +50,13 @@ services:
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-   certbot:
+  certbot:
     image: certbot/certbot:latest
     container_name: certbot
     volumes: 
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email milan.maroevich@gmail.com -d hellneverends.hu --agree-tos
+volumes:
+  mysql: {}
+
